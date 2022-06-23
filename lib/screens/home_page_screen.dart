@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:tutorials/widgets/items_widget.dart';
 import '../widgets/categories_widget.dart';
 import '../widgets/popular_items_widget.dart';
+import '../widgets/bottom_cart_sheet_widget.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -11,14 +13,14 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF00A368),
+      backgroundColor: const Color(0xFF00A368),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               //custom appbar
               Container(
-                padding: EdgeInsets.only(right: 20, left: 15, top: 10),
+                padding: const EdgeInsets.only(right: 20, left: 15, top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -28,7 +30,7 @@ class HomePageScreen extends StatelessWidget {
                       size: 30,
                     ),
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: const Color(0xFF00A368),
                         borderRadius: BorderRadius.circular(10),
@@ -48,7 +50,19 @@ class HomePageScreen extends StatelessWidget {
                             ),
                           ),
                           child: InkWell(
-                              onTap: (){},
+                              onTap: (){
+                                showSlidingBottomSheet(
+                                    context,
+                                    builder: (context) {
+                                      return SlidingSheetDialog(
+                                        elevation: 8,
+                                        cornerRadius: 16,
+                                        builder: (context, state) {
+                                          return const BottomCartSheetWidget();
+                                        }
+                                      );
+                                });
+                              },
                               child: const Icon(
                                   CupertinoIcons.cart,
                                   size: 30,
@@ -62,7 +76,7 @@ class HomePageScreen extends StatelessWidget {
               //welcome text
               Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
@@ -83,8 +97,8 @@ class HomePageScreen extends StatelessWidget {
               ),
               //search widget
               Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -94,7 +108,7 @@ class HomePageScreen extends StatelessWidget {
                   children: [
                     const Icon(Icons.search),
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 10),
                       width: 250,
                       child: TextFormField(
                           decoration: const InputDecoration(
